@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'pages',
     'crispy_forms',
     'crispy_bootstrap4',
+    'dashboards',
     
  
 ]
@@ -69,6 +70,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'blogs.context_processors.get_categories',
+                'blogs.context_processors.get_social_links',
                
             ],
         },
