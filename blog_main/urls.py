@@ -25,8 +25,14 @@ from blogs import views as Blogsview
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('', include('blogs.urls')),   # 👈 IMPORTANT CHANGE
-    path('<slug:slug>/', Blogsview.blogs, name='blog'),
+    path('category/', include('blogs.urls')),
+     path('blog/<slug:slug>/', Blogsview.blogs, name='blog'),  
     #Search endpoint
-    path('blog/search/', Blogsview.search, name='search'),
+    path('search/', Blogsview.search, name='search'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+   
+   
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
