@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<<!-- Page content-->
+<!-- Page content-->
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-8">
@@ -18,7 +18,9 @@
                     <a class="badge bg-warning text-decoration-none text-light" href="#!">{{ blog_post.category }}</a>
                 </header>
                 <!-- Preview image figure-->
+                {% if blog_post.featured_image %}
                 <figure class="mb-4"><img class="img-fluid rounded" src="{{ blog_post.featured_image.url }}" alt="..." /></figure>
+                {% endif %}
                 <!-- Post content-->
                 <section class="mb-5">
                     <p class="fs-5 mb-4">{{ blog_post.short_description }}</p>
