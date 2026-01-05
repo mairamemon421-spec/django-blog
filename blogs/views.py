@@ -1,7 +1,7 @@
 
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .models import Blog, Category
+from .models import Blog, Category, Comment
 from django.db.models import Q
 
 
@@ -22,9 +22,22 @@ def posts_by_category(request, category_id):
 def blogs(request, slug):
     # Fetch the specific blog post by slug
     blog_post = get_object_or_404(Blog, slug=slug, status='Published')
+    if request.method == 'POST':
+        comment = Comment()
+        comment.blog = blog_post
+        comment.user = request.user
+        comment.comment = request.POST['comment']
+        comment.save()
+        return redirect('blogs', slug=slug)
+
+    #comments
+    comments = Comment.objects.filter(blog=blog_post)
+    comment_count = comments.count()
 
     context = {
         'blog_post': blog_post,
+        'comments': comments,
+        'comment_count': comment_count,
     }
     return render(request, 'blogs.html', context)
 def search(request):
